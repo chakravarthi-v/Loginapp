@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "185036955601",
+    "project_id": "login-auth-ced1b",
+    "storage_bucket": "login-auth-ced1b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:185036955601:android:247cea6fb48c5ea96d4af0",
+        "android_client_info": {
+          "package_name": "com.example.loginapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "185036955601-574g52k3n12khl7i8dr9u3glbiqfsfcg.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.loginapp",
+            "certificate_hash": "7aaf57b48eab31ad0b4e7a14953c8813f15a4efb"
+          }
+        },
+        {
+          "client_id": "185036955601-fipn2fa2qqqrfosjm61ilo0f9014apiq.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC70SC1JIvnT-yu6dlDb8zKYfCzwXFrLJY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "185036955601-fipn2fa2qqqrfosjm61ilo0f9014apiq.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
