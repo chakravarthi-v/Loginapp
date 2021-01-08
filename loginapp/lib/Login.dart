@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'Homepage.dart';
+
 class Login extends StatefulWidget {
   @override
   _LoginState createState() => _LoginState();
@@ -25,70 +27,109 @@ class _LoginState extends State<Login> {
     }
   }
 
+  login() async {
+    if (_formKey.currentState.validate()) {
+      _formKey.currentState.save();
+      try {
+        // ignore: deprecated_member_use
+        UserCredential user = await _auth.signInWithEmailAndPassword(
+            email: _email, password: _password);
+      } catch (e) {
+        showError(e.errormessage);
+      }
+    }
+  }
+
+  showError(String errormessage) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          title: Text('ERROR'),
+          content: Text(errormessage),
+          actions: <Widget>[
+            FlatButton(
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+                child: Text('OK'))
+          ],
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: Container(
-      child: Column(
-        children: <Widget>[
-          Container(
-            height: 400,
-            child: Image(
-              image: AssetImage("images/login.jpg"),
-              fit: BoxFit.contain,
+        body: SingleChildScrollView(
+      child: Container(
+        child: Column(
+          children: <Widget>[
+            Container(
+              height: 500,
+              child: Image(
+                image: AssetImage("images/home.png"),
+                fit: BoxFit.contain,
+              ),
             ),
-          ),
-          Container(
-            child: Form(
-              key: _formKey,
-              child: Column(
-                children: <Widget>[
-                  Container(
-                    child: TextFormField(
+            Container(
+              child: Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    Container(
+                      child: TextFormField(
                         // ignore: missing_return
                         validator: (input) {
                           if (input.isEmpty) return 'Enter Email';
-                          },
-                      decoration:
-                      InputDecoration(
-                        labelText: 'Email',
-                        prefixIcon: Icon(Icons.email),
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'Email',
+                          prefixIcon: Icon(Icons.email),
+                        ),
+                        onSaved: (input) => _email = input,
                       ),
-                      onSaved:
-                      (input) => _email = input,
                     ),
-                  ),
-                  Container(
-                    child: TextFormField(
+                    Container(
+                      child: TextFormField(
                         // ignore: missing_return
                         validator: (input) {
-                      if (input.length < 6)
-                        return 'Provide Minimum 6 Character';},
-                      decoration:
-                      InputDecoration(
-                        labelText: 'Password',
-                        prefixIcon: Icon(Icons.lock),
+                          if (input.length < 6)
+                            return 'Provide Minimum 6 Character';
+                        },
+                        decoration: InputDecoration(
+                          labelText: 'Password',
+                          prefixIcon: Icon(Icons.lock),
+                        ),
+                        obscureText: true,
+                        onSaved: (input) => _password = input,
                       ),
-                      obscureText:
-                      true,
-                      onSaved:
-                      (input) => _password = input,
                     ),
-                  ),
-                  RaisedButton(
-                      onPressed: () {},
+                    SizedBox(
+                      height: 40.0,
+                    ),
+                    RaisedButton(
+                      padding: EdgeInsets.fromLTRB(70, 10, 70, 10),
+                      onPressed: login,
                       child: Text(
                         'LOGIN',
                         style: TextStyle(
                             color: Colors.white,
                             fontSize: 20.0,
                             fontWeight: FontWeight.bold),
-                      ))
-                ],
+                      ),
+                      color: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20.0),
+                      ),
+                    )
+                  ],
+                ),
               ),
-            ),
-          )
-        ],
+            )
+          ],
+        ),
       ),
     ));
   }

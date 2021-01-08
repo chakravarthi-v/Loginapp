@@ -1,11 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_signin_button/flutter_signin_button.dart';
+import 'package:loginapp/Login.dart';
+import 'Login.dart';
+import 'signup.dart';
 class Start extends StatefulWidget {
   @override
   _StartState createState() => _StartState();
 }
 
 class _StartState extends State<Start> {
+  navigatotologin()async{
+    Navigator.push(context, MaterialPageRoute(builder: (context)=> Login()));
+  }
+  navigatotoregister()async{
+    Navigator.push(context, MaterialPageRoute(builder: (context)=> signup()));
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -32,7 +41,7 @@ class _StartState extends State<Start> {
                     TextSpan(
                       text: 'BuddyBook',
                       style: TextStyle(
-                          color: Colors.blue,
+                          color: Colors.orange,
                           fontSize: 40.0,
                           fontWeight: FontWeight.bold),
                     )
@@ -50,7 +59,7 @@ class _StartState extends State<Start> {
               children: <Widget>[
                 RaisedButton(
                   padding:EdgeInsets.only(left: 30,right: 30),
-                  onPressed: () {},
+                  onPressed: navigatotologin,
                   child: Text(
                     'LOGIN',
                     style: TextStyle(
@@ -62,14 +71,14 @@ class _StartState extends State<Start> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  color: Colors.blue,
+                  color: Colors.black,
                 ),
                 SizedBox(
                   width: 30.0,
                 ),
                 RaisedButton(
                   padding:EdgeInsets.only(left: 30,right: 30),
-                  onPressed: () {},
+                  onPressed: navigatotoregister,
                   child: Text(
                     'SIGN UP',
                     style: TextStyle(
@@ -81,7 +90,7 @@ class _StartState extends State<Start> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(10.0),
                   ),
-                  color: Colors.blue,
+                  color: Colors.black,
                 ),
                 SizedBox(height: 20.0,),
               ],
