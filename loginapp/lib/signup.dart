@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:loginapp/Homepage.dart';
+
+import 'Homepage.dart';
+import 'Login.dart';
 class signup extends StatefulWidget {
   @override
   _signupState createState() => _signupState();
@@ -8,11 +11,11 @@ class signup extends StatefulWidget {
 
 // ignore: camel_case_types
 class _signupState extends State<signup> {
-  final FirebaseAuth _auth=FirebaseAuth.instance;
+   FirebaseAuth _auth=FirebaseAuth.instance;
   final GlobalKey<FormState> _formkey= GlobalKey<FormState>();
   String _email,_password,_name;
-  checkauthentication()async{
-    _auth.authStateChanges().listen((user) async{
+  checkauthentication(){
+    _auth.authStateChanges().listen((user){
       if(user!=null)
         {
           Navigator.push(context, MaterialPageRoute(builder: (context)=> Homepage()));
@@ -23,7 +26,7 @@ class _signupState extends State<signup> {
   void initState()
   {
     super.initState();
-    this.checkauthentication();
+    //this.checkauthentication();
   }
   signup()async
   {
@@ -33,12 +36,22 @@ class _signupState extends State<signup> {
       }
     try
         {
-          UserCredential user =await _auth.createUserWithEmailAndPassword(email: _email, password: _password);
-          if(user!=null)
-            {
-              await _auth.currentUser.updateProfile(displayName: _name);
+          //UserCredential user =await
+          await _auth.createUserWithEmailAndPassword(email: _email, password: _password)
+              .then((value)  {
+                value.user.updateProfile(displayName: _name);
+          }).then((value) {
+           // if(value!=null)
+           // {
+              Navigator.push(context, MaterialPageRoute(builder: (context)=> Homepage()));
+            //}
+          } );
 
-            }
+          // if(user!=null)
+          //   {
+          //     await _auth.currentUser.updateProfile({displayName: _name}).tnullhen((value) => );
+          //
+          //   }
         }
     catch(e)
     {

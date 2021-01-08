@@ -78,7 +78,9 @@ class _StartState extends State<Start> {
                 ),
                 RaisedButton(
                   padding:EdgeInsets.only(left: 30,right: 30),
-                  onPressed: navigatotoregister,
+                  onPressed: (){
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> signup()));
+                  },
                   child: Text(
                     'SIGN UP',
                     style: TextStyle(
